@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — runtime CSS variables so light/dark can swap subtly */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-pill: var(--pill);
+  --color-pill-active: var(--pill-active);
+
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-ghost: var(--ink-ghost);
+
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-ink: var(--brand-ink);
+
+  --color-community: var(--community);
+  --color-community-dark: var(--community-dark);
+  --color-community-soft: var(--community-soft);
+  --color-community-ink: var(--community-ink);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+}
+
+:root {
+  --surface: #ffffff;
+  --muted: #f5f6f8;
+  --muted-2: #ebeef2;
+  --pill: #f0f2f5;
+  --pill-active: #ffffff;
+
+  --paper: #f6f6f8;
+  --line: #e7e8ee;
+  --line-strong: #d5d8e0;
+
+  --ink: #0f172a;
+  --ink-soft: #46536b;
+  --ink-faint: #8b96a8;
+  --ink-ghost: #e2e8f0;
+
+  --brand: #c8372c;
+  --brand-dark: #a52a21;
+  --brand-soft: #fbe9e7;
+  --brand-ink: #b0241a;
+
+  --community: #6d28d9;
+  --community-dark: #5b21b6;
+  --community-soft: #efeafc;
+  --community-ink: #5b21b6;
+
+  --success: #047857;
+  --success-soft: #ecfdf5;
+  --warning: #a16207;
+  --warning-soft: #fefce8;
+
+  --skeleton: #eceef2;
+  --skeleton-highlight: rgba(255, 255, 255, 0.7);
+}
+
+.dark {
+  --surface: #191c23;
+  --muted: #20242d;
+  --muted-2: #282d38;
+  --pill: #232833;
+  --pill-active: #343b48;
+
+  --paper: #101216;
+  --line: #262b35;
+  --line-strong: #343b48;
+
+  --ink: #eef1f6;
+  --ink-soft: #aeb8c6;
+  --ink-faint: #6f7a89;
+  --ink-ghost: #2a2f3a;
+
+  --brand: #e06057;
+  --brand-dark: #cf4a41;
+  --brand-soft: #3a211e;
+  --brand-ink: #f1a9a4;
+
+  --community: #8f74d8;
+  --community-dark: #7f63c9;
+  --community-soft: #282139;
+  --community-ink: #c6b5f2;
+
+  --success: #5cd6a4;
+  --success-soft: #143027;
+  --warning: #e7c45c;
+  --warning-soft: #2b2412;
+
+  --skeleton: #242a35;
+  --skeleton-highlight: rgba(255, 255, 255, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--brand-soft);
+    color: var(--brand-ink);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .prose-body {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .prose-body p {
+    margin-bottom: 1.25rem;
+    white-space: pre-line;
+  }
+
+  .focus-ring {
+    outline: none;
+  }
+  .focus-ring:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 28%, transparent);
+  }
+
+  .input-base {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--line-strong);
+    background-color: var(--surface);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .input-base::placeholder {
+    color: var(--ink-faint);
+  }
+  .input-base:focus {
+    outline: none;
+    border-color: color-mix(in srgb, var(--brand) 45%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--skeleton);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

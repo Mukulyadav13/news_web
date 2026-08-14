@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { db, ensureDbInitialized } from "./index";
 import { categories, newsArticles } from "./schema";
-import { eq } from "drizzle-orm";
 
 const IMAGES = [
   "https://images.pexels.com/photos/38443570/pexels-photo-38443570.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
@@ -34,101 +33,80 @@ function slugify(input: string): string {
     .replace(/(^-|-$)+/g, "");
 }
 
-const TEMPLATES = [
+const TOPICS = [
   {
-    topic: "Global Artificial Intelligence Accord Signed by 35 Nations",
-    scope: "international" as const,
+    title: "Global Artificial Intelligence Safety Accord Signed by 35 Nations",
     categoryName: "World Affairs",
-    summary: "Delegates from major tech nations signed a binding framework establishing safety standards and transparency rules for frontier AI models.",
-    content: "In a landmark diplomatic gathering, representatives from 35 countries agreed on a comprehensive international agreement regarding artificial intelligence safety and governance.\n\nThe framework outlines mandatory safety testing, open transparency protocols for training datasets, and guidelines for mitigating algorithmic bias across critical infrastructure.\n\nIndustry leaders and international policymakers praised the agreement as a vital foundation for fostering innovation while protecting global security.",
+    summary: "Delegates from major tech nations signed a binding framework establishing safety standards, open transparency protocols, and watermarking for frontier AI models.",
+    section1: "In a historic diplomatic milestone, representatives from 35 nations formally ratified the International Artificial Intelligence Governance and Safety Accord. The treaty establishes standardized evaluation criteria for frontier AI models exceeding 10^26 floating-point operations. The signatory states agreed to establish independent national safety institutes tasked with pre-deployment red-teaming, alignment verification, and automated vulnerability scanning across critical infrastructure systems.",
+    section2: "Key provisions of the agreement mandate verifiable digital watermarking for synthetic media, open access to training dataset documentation, and strict audit trails for autonomous agent deployments in banking, healthcare, and power grid operations. The treaty also includes mutual assistance protocols to rapidly share threat intelligence regarding algorithmic exploits or rogue autonomous systems.",
+    section3: "Chief technology officers and international legal experts hailed the summit outcome as a vital safeguard for global security. 'This accord provides clear operational guardrails without stifling open-source research or startup agility,' stated Dr. Elena Rostova, senior delegate to the convention. Implementation working groups will convene next month in Geneva to finalize technical compliance metrics for global software exporters.",
   },
   {
-    topic: "Renewable Energy Capacity Reaches All-Time Global Record",
-    scope: "international" as const,
+    title: "India Launches Semicon 2.0 with ₹1,27,500 Crore Outlay for Domestic Chip Manufacturing",
     categoryName: "Business",
-    summary: "Solar, wind, and battery storage installations grew by over 45% year-over-year, driven by rapid industrial adoption.",
-    content: "International energy monitors reported a unprecedented surge in renewable energy capacity installations worldwide over the past twelve months.\n\nSolar photovoltaic systems and offshore wind farms accounted for the vast majority of new power generation, supported by falling battery storage costs.\n\nAnalysts noted that sustained investment in grid modernization will be crucial to supporting the growing proportion of clean electricity.",
+    summary: "The national semiconductor strategy accelerates multi-hub silicon fabrication, advanced 3D packaging, and specialized talent development.",
+    content: "The Ministry of Electronics and Information Technology has officially initiated 'Semicon 2.0' with an approved financial allocation of ₹1,27,500 crore ($15.2 billion) aimed at positioning India as a global microelectronics manufacturing hub.\n\nThe expanded framework builds upon early silicon wafer initiatives by introducing six core pillars: ultra-clean room fabrication plants, compound semiconductor foundries, advanced fan-out packaging, domestic Electronic Design Automation (EDA) software tooling, specialized university chip labs, and a national deep-tech R&D ecosystem.\n\nUnder the new guidelines, eligible semiconductor consortiums can receive up to 50% capital expenditure support for establishing commercial foundries capable of producing 28nm and sub-14nm node chips. Several international hardware manufacturers and domestic industrial groups have already submitted joint venture proposals for facilities in Gujarat, Karnataka, and Tamil Nadu.\n\nIndustry analysts estimate that Semicon 2.0 will generate over 100,000 direct high-tech engineering jobs and secure domestic supply chains for automotive electronics, 5G/6G telecommunications, and industrial automation over the next decade.",
   },
   {
-    topic: "Quantum Supercomputing Milestone Achieved in Joint European Lab",
-    scope: "international" as const,
+    title: "US Threatens Indefinite Naval Blockade in Strait of Hormuz Amid Middle East Tension",
+    categoryName: "World Affairs",
+    summary: "Defense officials confirmed carrier strike group rotations in West Asia following Gulf commercial tanker incidents as diplomatic negotiations stall.",
+    content: "The United States Department of Defense confirmed plans to sustain an indefinite naval presence in the Strait of Hormuz to maintain economic pressure and protect commercial shipping lanes amid heightened regional tensions.\n\nDefense Secretary Pete Hegseth announced that carrier strike groups and guided-missile destroyers will maintain continuous maritime patrols across the narrow waterway, through which approximately 20% of global petroleum passes daily.\n\nThe announcement follows recent drone and missile incidents targeting commercial oil tankers near regional transit corridors. International maritime organizations have issued elevated security alerts for vessel operators navigating the Gulf of Oman and Bab-el-Mandeb Strait.\n\nGlobal energy analysts warned that prolonged naval deployments and maritime standoffs could maintain upward pressure on global crude prices, prompting emergency consultations among international energy agencies.",
+  },
+  {
+    title: "ISRO and NASA Expand TRUST Agreement for Joint Lunar Base & Deep Space Exploration",
+    categoryName: "Education",
+    summary: "Space agencies finalized expanding shared lunar surface payloads, deep space tracking networks, and open scientific data repositories.",
+    content: "Senior leadership delegations from ISRO and NASA concluded bilateral talks at the ISRO Telemetry Tracking and Command Network (ISTRAC) in Bengaluru, cementing a major expansion of the TRUST (Technology, Research, and Space Transport) agreement.\n\nThe updated accord outlines joint operational protocols for sharing deep-space communication dish arrays, lunar orbiter radiation telemetry, and prospective Indian scientific instrument payloads aboard upcoming Artemis lunar surface missions.\n\nBoth space agencies agreed to establish a unified open-access planetary science data repository, granting researchers worldwide real-time access to high-resolution lunar mineral maps and solar wind dynamics captured by Chandrayaan and lunar orbiter payloads.\n\n'This partnership highlights our shared commitment to peaceful, transparent, and collaborative space exploration,' stated ISRO Chairman S. Somanath. Joint engineering teams will begin integrated simulation testing for lunar habitat life-support interfaces early next year.",
+  },
+  {
+    title: "Breakthrough in Room-Temperature Superconductors Certified by Joint European Physics Lab",
     categoryName: "Science",
-    summary: "Researchers demonstrated fault-tolerant quantum logic gates operating with 99.9% fidelity at room temperature.",
-    content: "Scientists at a joint European quantum research laboratory reported a breakthrough in fault-tolerant quantum computing operations.\n\nBy leveraging advanced superconducting materials, the team maintained stable qubit coherence at significantly higher operational temperatures than previously possible.\n\nExperts expect the advancement to accelerate applications in molecular simulation, climate modelling, and industrial optimization.",
+    summary: "Independent verification confirms zero electrical resistance in ambient-pressure lutetium hydride alloys, paving the way for loss-free power grids.",
+    content: "An international consortium of experimental physicists has independently verified room-temperature superconductivity in ambient-pressure modified metal hydride compounds at a joint European research center.\n\nThe breakthrough material demonstrated stable zero electrical resistance and strong diamagnetic flux expulsion at 21°C (69.8°F) under standard atmospheric pressure, fulfilling a century-old quest in condensed matter physics.\n\nEngineers note that room-temperature, ambient-pressure superconductors could revolutionize energy infrastructure by eliminating transmission losses, which currently consume up to 10% of global electricity generation.\n\nCommercial applications also extend to compact high-field MRI scanners, frictionless magnetic levitation transit, and ultra-dense quantum computing processors. Industrial scale-up trials for thin-film wire fabrication are scheduled to begin within 18 months.",
   },
   {
-    topic: "Indian High-Speed Rail Corridor Reaches Major Construction Milestone",
-    scope: "national" as const,
-    categoryName: "Politics",
-    summary: "Engineers completed tunnel boring work across key mountain sectors ahead of schedule for the flagship rail project.",
-    content: "Rail infrastructure authorities announced the successful completion of major tunneling operations along the high-speed rail corridor.\n\nThe milestone marks significant progress toward linking major commercial hubs with electric bullet train service capable of speeds up to 320 km/h.\n\nProject directors confirmed that track laying and overhead electrification installations will begin across completed elevated sections next month.",
-  },
-  {
-    topic: "Global Health Organization Launches Universal Vaccine Supply Network",
-    scope: "international" as const,
+    title: "Global Health Emergency Escalates as WHO and UNICEF Deploy Rapid Medical Aid in Central Africa",
     categoryName: "Health",
-    summary: "A international coalition established cold-chain drone delivery networks to reach remote regions in developing nations.",
-    content: "Global health leaders unveiled a coordinated vaccine delivery initiative utilizing autonomous drone technology and solar-powered cold storage units.\n\nThe initiative addresses long-standing distribution bottlenecks in isolated rural areas, ensuring prompt delivery of essential immunization doses.\n\nField trials demonstrated a 70% reduction in transit times and near-zero inventory loss during extreme weather events.",
+    summary: "Multi-country aid operations dispatch oral vaccines, mobile treatment units, and field epidemiologists to combat concurrent viral outbreaks.",
+    content: "The World Health Organization (WHO) and UNICEF launched a emergency medical intervention across Central and West Africa to contain accelerating Ebola and cholera outbreaks.\n\nField epidemiologists reported over 4,400 confirmed Ebola virus cases in eastern province districts, alongside severe cholera surges across six neighboring nations due to seasonal flooding and disrupted sanitation infrastructure.\n\nEmergency response teams have airlifted 250,000 doses of investigational vaccines, mobile clean-water purification plants, and personal protective gear to frontline healthcare clinics.\n\nWHO Director-General Tedros Adhanom Ghebreyesus urged donor nations to expedite release of emergency pandemic relief funds to prevent regional cross-border transmission.",
   },
   {
-    topic: "National Semiconductor Design Hub Opens in Bengaluru",
-    scope: "national" as const,
+    title: "IMD and NOAA Operationalize Next-Gen IOLA Ocean-Atmosphere Forecasting Model",
+    categoryName: "Health",
+    summary: "Meteorologists deployed high-resolution satellite oceanography to predict extreme monsoon shifts and severe tropical cyclone tracks.",
+    content: "The India Meteorological Department (IMD) in partnership with the US National Oceanic and Atmospheric Administration (NOAA) has operationalized the coupled IOLA (Indian Ocean–Land–Atmosphere) numerical weather prediction system.\n\nThe advanced oceanographic model integrates real-time sea surface temperature telemetry from deep-sea buoys with high-altitude satellite radar to capture sub-surface thermal anomalies.\n\nEarly validation trials demonstrated a 40% improvement in predicting localized cloudburst events and extreme monsoon rainfall variations up to seven days in advance.\n\nAgricultural planners and disaster management authorities emphasized that accurate long-range forecasts will dramatically improve crop management strategies and coastal evacuation readiness.",
+  },
+  {
+    title: "Wall Street Reaches Historical Highs as Global Central Banks Coordinate Policy Stability",
     categoryName: "Business",
-    summary: "The state-of-the-art facility provides chip startups with advanced EDA tools, prototyping multi-project wafers, and mentorship.",
-    content: "India's technology ministry inaugurated a state-of-the-art semiconductor design center in Bengaluru to support domestic microchip innovation.\n\nThe facility equips early-stage hardware startups with access to high-end Electronic Design Automation (EDA) software and shared prototyping foundries.\n\nGovernment representatives highlighted that the initiative aims to train over 50,000 chip design engineers over the next five years.",
-  },
-  {
-    topic: "Oceanographic Survey Discovers Deep-Sea Ecosystem in Pacific Trench",
-    scope: "international" as const,
-    categoryName: "Science",
-    summary: "Marine biologists mapped hydrothermal vent fields harboring previously unrecorded bioluminescent species at 8,000 meters depth.",
-    content: "An international oceanographic expedition utilizing deep-sea submersibles mapped an extensive ecosystem in unexplored Pacific abyssal zones.\n\nResearchers documented dozens of novel bioluminescent organisms thriving near superheated mineral vents under extreme pressure.\n\nThe discovery highlights the importance of protecting deep ocean environments from industrial seabed mining operations.",
-  },
-  {
-    topic: "National Athletics Championship Sees Breakout Sprint Performances",
-    scope: "national" as const,
-    categoryName: "Sports",
-    summary: "Young athletes shattered multiple national records in track events during the annual stadium championships.",
-    content: "The National Athletics Championship concluded with record-breaking performances in sprint and field events.\n\nSeveral teenage sprinters clocked sub-10.20s times in the 100m finals, securing qualification spots for upcoming international meets.\n\nCoaching staff credited revamped grass-root training academies and sports science diagnostics for the rising talent pool.",
-  },
-  {
-    topic: "Global Autonomous Electric Transport Pilot Expands to 15 Metro Cities",
-    scope: "international" as const,
-    categoryName: "Business",
-    summary: "Commercial transit operators expanded driverless electric shuttle fleets into urban corridors following positive safety trials.",
-    content: "Urban transit authorities across fifteen global cities announced expanded operations for autonomous electric passenger shuttles.\n\nThe vehicles utilize multi-modal lidar and vision systems to navigate high-density traffic corridors with high reliability.\n\nPassenger feedback surveys reported strong public confidence, with commuter demand prompting cities to expand dedicated transit lanes.",
-  },
-  {
-    topic: "National Clean Water Initiative Reaches 100 Million Households",
-    scope: "national" as const,
-    categoryName: "Politics",
-    summary: "Piped drinking water connections achieved complete coverage across rural districts ahead of national target dates.",
-    content: "The national rural water mission passed a historic milestone after delivering functional household tap connections to 100 million rural homes.\n\nThe program has transformed public health metrics in rural communities, drastically reducing water-borne diseases and domestic workload.\n\nCommunity water committees are taking over long-term maintenance and automated water quality monitoring.",
+    summary: "Equities rallied across major international exchanges following strong corporate earnings and coordinated monetary guidance.",
+    content: "Major global equity markets registered all-time high valuation records following robust technology earnings releases and synchronized economic policy statements from central banks.\n\nThe global market rally was led by semiconductor manufacturers, cloud computing providers, and renewable energy equipment producers, with key benchmark indices climbing over 2.4% in single-day trading.\n\nConcurrently, European regulatory bodies announced final implementation schedules for updated commercial trade rules, emphasizing supply chain traceability and sustainable packaging standards.\n\nInstitutional portfolio managers noted that sustained capital flows into high-growth innovation sectors reflect underlying economic resilience despite shifting global interest rate benchmarks.",
   },
 ];
 
 const SECTORS = [
-  "Artificial Intelligence", "Semiconductors", "Clean Energy", "Space Exploration",
-  "Global Trade", "Electric Vehicles", "Quantum Computing", "Public Health",
-  "Cybersecurity", "Fintech", "Higher Education", "Robotics", "Infrastructure",
-  "Biotechnology", "Agriculture Tech", "Smart Cities", "Climate Resilience",
-  "Digital Economy", "Renewable Power", "Maritime Logistics", "Telecom 6G",
-  "Aero-Defence", "Medical Devices", "Urban Transit", "Supply Chain"
+  "Artificial Intelligence Safety", "Quantum Hardware", "Semiconductor Fabrication",
+  "Clean Energy Transition", "Autonomous Mobility", "Deep-Sea Oceanography",
+  "Global Health Security", "Commercial Space Flight", "Next-Gen Telecom 6G",
+  "High-Speed Rail Networks", "Biotechnology Innovation", "Sustainable Trade",
+  "Climate Resilient Agriculture", "Smart City Infrastructure", "Robotic Automation"
 ];
 
-const PLACES_INTL = [
+const CITIES_INTL = [
   "Geneva", "Tokyo", "London", "New York", "Singapore", "Berlin", "Paris",
   "Sydney", "Seoul", "Toronto", "Dubai", "Brussels", "Zurich", "Stockholm"
 ];
 
-const PLACES_NAT = [
+const CITIES_NAT = [
   "New Delhi", "Bengaluru", "Mumbai", "Hyderabad", "Chennai", "Pune",
   "Kolkata", "Ahmedabad", "Jaipur", "Lucknow", "Chandigarh", "Kochi"
 ];
 
 export async function generate200News() {
   await ensureDbInitialized();
-  console.log("Generating 200 real-time news articles…");
+  console.log("Generating 200 vast, in-depth, real-world news articles…");
 
   const allCats = await db.query.categories.findMany();
 
@@ -136,23 +114,30 @@ export async function generate200News() {
   const now = Date.now();
 
   for (let i = 1; i <= 200; i++) {
-    const template = TEMPLATES[i % TEMPLATES.length];
+    const topicObj = TOPICS[i % TOPICS.length];
     const sector = SECTORS[i % SECTORS.length];
     const isNational = i % 2 === 0;
-    const place = isNational ? PLACES_NAT[i % PLACES_NAT.length] : PLACES_INTL[i % PLACES_INTL.length];
+    const city = isNational ? CITIES_NAT[i % CITIES_NAT.length] : CITIES_INTL[i % CITIES_INTL.length];
     const scope = isNational ? "national" : "international";
 
-    const catName = template.categoryName;
+    const catName = topicObj.categoryName;
     const matchingCat = allCats.find((c: any) => c.scope === scope && c.name.includes(catName)) || allCats[0];
 
-    const title = `${place}: Major ${sector} initiative announced in ${2026} update #${i}`;
-    const slug = slugify(`${title}-${now}-${i}`);
-    const summary = `${template.summary} Focus on ${sector} innovation in ${place}.`;
-    const content = `${template.content}\n\nLocal authorities and global analysts in ${place} confirmed that the ${sector} developments represent a pivotal shift in industry standards.\n\nFurther policy details and implementation roadmaps will be reviewed in upcoming executive sessions.`;
+    // Every 3rd news item is important/featured, every 5th is breaking
+    const isImportant = i % 3 === 0 || i <= 15;
+    const isBreaking = i % 5 === 0 || i <= 5;
+
+    const title = i <= 8 ? topicObj.title : `${city}: Major ${sector} development announced in global ${2026} briefing #${i}`;
+    const baseSlug = slugify(title).slice(0, 75);
+    const slug = `${baseSlug}-${now}-${i}`;
+
+    const summary = i <= 8 ? topicObj.summary : `Comprehensive report from ${city} detailing key advancements, policy guidelines, and strategic economic impact of ${sector} initiatives.`;
+
+    const bodyContent = topicObj.content || topicObj.section1 + "\n\n" + topicObj.section2 + "\n\n" + topicObj.section3;
+    const content = `${bodyContent}\n\nKey Strategic Takeaways for ${city}:\n- Accelerated investment allocation for ${sector} infrastructure.\n- Multi-lateral regulatory framework established for global compliance.\n- High-impact job creation projected across engineering and research sectors over the next 5 years.`;
+
     const imageUrl = IMAGES[i % IMAGES.length];
-    const isBreaking = i % 7 === 0;
-    const isFeatured = i % 5 === 0;
-    const publishedAt = new Date(now - (i * 35 * 60 * 1000));
+    const publishedAt = new Date(now - (i * 20 * 60 * 1000));
 
     articlesToInsert.push({
       title,
@@ -162,22 +147,24 @@ export async function generate200News() {
       imageUrl,
       categoryId: matchingCat.id,
       scope,
-      isFeatured,
+      isFeatured: isImportant,
       isBreaking,
-      views: Math.floor(Math.random() * 25000) + 1500,
-      likesCount: Math.floor(Math.random() * 800) + 100,
-      commentsCount: Math.floor(Math.random() * 150) + 10,
+      views: Math.floor(Math.random() * 45000) + 5000,
+      likesCount: Math.floor(Math.random() * 1200) + 250,
+      commentsCount: Math.floor(Math.random() * 300) + 40,
       publishedAt,
     });
   }
 
-  // Insert in batches of 50
+  // Truncate and re-seed clean news articles table
+  await db.execute(require("drizzle-orm").sql`TRUNCATE TABLE news_articles RESTART IDENTITY CASCADE`);
+
   for (let i = 0; i < articlesToInsert.length; i += 50) {
     const batch = articlesToInsert.slice(i, i + 50);
     await db.insert(newsArticles).values(batch);
   }
 
-  console.log(`Successfully generated and inserted 200 news articles into database!`);
+  console.log(`Successfully generated and seeded 200 vast, in-depth articles into database!`);
 }
 
 if (typeof require !== "undefined" && require.main === module) {

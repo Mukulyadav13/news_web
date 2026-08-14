@@ -18,11 +18,10 @@ import { formatNumber } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [breaking, featured, latest, national, international, trending, college, popular] =
+  const [breaking, featured, national, international, trending, college, popular] =
     await Promise.all([
       getBreakingNews(),
       getFeaturedNews(),
-      getLatestMixedNews(6),
       getNewsByScope({ scope: "national", sort: "popular" }),
       getNewsByScope({ scope: "international", sort: "popular" }),
       getTrendingCommunity(4),
@@ -30,8 +29,10 @@ export default async function HomePage() {
       getPopularCommunity(4),
     ]);
 
+  // Main page shows strictly top featured / important articles
   const hero = featured[0];
   const secondary = featured.slice(1, 5);
+  const importantArticles = featured.filter((a: any) => a.isFeatured || a.isBreaking).slice(5, 11);
 
   return (
     <div>
@@ -67,11 +68,11 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ---------------- Latest News ---------------- */}
+        {/* ---------------- Important Stories ---------------- */}
         <section className="py-10">
-          <SectionHeading title="Latest News" eyebrow="Just in" actionLabel="View all" actionHref="/news" />
+          <SectionHeading title="Important Stories" eyebrow="Featured & Breaking" actionLabel="View all news" actionHref="/news" />
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {latest.map((article: any) => (
+            {importantArticles.map((article: any) => (
               <NewsCard key={article.id} article={article} />
             ))}
           </div>

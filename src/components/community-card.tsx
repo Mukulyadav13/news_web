@@ -55,7 +55,10 @@ export function CommunityCard({
           <p className="text-xs text-ink-faint">{timeAgo(post.createdAt)}</p>
         </div>
         {post.category ? (
-          <Badge tone={post.category.name === "College" ? "community" : "neutral"}>
+          <Badge
+            tone={post.category.name === "College" ? "community" : "neutral"}
+            className="shrink-0"
+          >
             {post.category.name}
           </Badge>
         ) : null}

@@ -19,7 +19,7 @@ export function BreakingStrip({ articles }: { articles: NewsArticle[] }) {
             <Link
               key={a.id}
               href={`/news/${a.slug}`}
-              className="text-sm font-medium text-white/95 transition-opacity duration-200 hover:text-white"
+              className="shrink-0 text-sm font-medium text-white/95 transition-opacity duration-200 hover:text-white"
             >
               {a.title}
             </Link>

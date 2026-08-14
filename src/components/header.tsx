@@ -6,54 +6,51 @@ import { DEMO_USER } from "@/lib/constants";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-surface shadow-xs">
-      {/* Top GENZ Branding Header */}
-      <div className="bg-brand text-white">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="group flex items-center gap-2.5">
-            {/* Iconic GENZ 4-Box Branding Logo */}
-            <div className="flex items-center gap-1">
-              <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                G
-              </span>
-              <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                E
-              </span>
-              <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                N
-              </span>
-              <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                Z
-              </span>
-            </div>
-            <span className="text-xl font-black tracking-wider text-white uppercase">
-              NEWS
+    <header className="sticky top-0 z-50 border-b border-line bg-surface/95 backdrop-blur-md shadow-xs">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        {/* Branding Logo */}
+        <Link href="/" className="group flex shrink-0 items-center gap-2">
+          <div className="flex items-center gap-1">
+            <span className="flex h-7 w-7 items-center justify-center rounded bg-brand text-sm font-black tracking-tighter text-white">
+              G
             </span>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <form
-              action="/search"
-              method="get"
-              className="relative hidden w-64 md:block"
-            >
-              <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/70" />
-              <input
-                type="search"
-                name="q"
-                placeholder="Search GENZ News…"
-                className="w-full rounded bg-white/15 py-1.5 pl-8 pr-3 text-xs text-white placeholder:text-white/70 focus:bg-white focus:text-black focus:outline-none focus:placeholder:text-gray-500"
-              />
-            </form>
-            <ProfileMenu user={DEMO_USER} />
+            <span className="flex h-7 w-7 items-center justify-center rounded bg-brand text-sm font-black tracking-tighter text-white">
+              E
+            </span>
+            <span className="flex h-7 w-7 items-center justify-center rounded bg-brand text-sm font-black tracking-tighter text-white">
+              N
+            </span>
+            <span className="flex h-7 w-7 items-center justify-center rounded bg-brand text-sm font-black tracking-tighter text-white">
+              Z
+            </span>
           </div>
-        </div>
-      </div>
+          <span className="text-lg font-black tracking-wider text-ink uppercase">
+            NEWS
+          </span>
+        </Link>
 
-      {/* GENZ Editorial Category Navigation Bar */}
-      <div className="border-b border-line bg-surface">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Navigation Links in Center */}
+        <div className="hidden lg:block">
           <NavLinks />
+        </div>
+
+        {/* Search & Profile Controls on Right */}
+        <div className="flex items-center gap-3">
+          <form
+            action="/search"
+            method="get"
+            className="relative hidden w-48 md:block sm:w-60"
+          >
+            <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-ink-faint" />
+            <input
+              type="search"
+              name="q"
+              placeholder="Search GENZ News…"
+              className="w-full rounded-full border border-line bg-muted py-1.5 pl-8 pr-3 text-xs text-ink placeholder:text-ink-faint focus:border-brand/40 focus:bg-surface focus:outline-none focus:ring-2 focus:ring-brand/10"
+            />
+          </form>
+
+          <ProfileMenu user={DEMO_USER} />
         </div>
       </div>
     </header>

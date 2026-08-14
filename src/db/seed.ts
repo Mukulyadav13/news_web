@@ -410,6 +410,125 @@ export async function seedData(targetDb?: any) {
       commentsCount: 35,
       publishedAt: hoursAgo(26),
     },
+    {
+      title: "US threatens indefinite naval blockade in Strait of Hormuz amid Middle East tension",
+      slug: "us-naval-blockade-strait-of-hormuz",
+      summary:
+        "US defense officials confirmed naval ship rotations in West Asia following Gulf tanker incidents as diplomatic talks stall.",
+      content:
+        "The United States has indicated it will sustain a naval blockade in the Strait of Hormuz to maintain economic pressure following stalled ceasefire talks in West Asia.\n\nDefense Secretary Pete Hegseth stated that naval forces will rotate aircraft carrier strike groups to ensure maritime security and freedom of navigation across critical energy transit routes.\n\nThe announcement comes after regional authorities reported attacks on commercial tankers, prompting international calls for immediate de-escalation and safe passage.",
+      imageUrl: IMG.shanghaiNight,
+      categoryId: catId("international", "World Affairs"),
+      scope: "international",
+      isFeatured: true,
+      isBreaking: true,
+      views: 24800,
+      likesCount: 890,
+      commentsCount: 310,
+      publishedAt: hoursAgo(1),
+    },
+    {
+      title: "WHO and UNICEF escalate emergency response to Ebola and Cholera outbreaks in Central Africa",
+      slug: "who-unicef-ebola-cholera-outbreak-response",
+      summary:
+        "Health organizations have dispatched medical supplies and vaccines across the DRC and neighboring nations to contain spreading infections.",
+      content:
+        "The World Health Organization (WHO) and UNICEF have intensified emergency medical aid operations in the Democratic Republic of the Congo and West Africa following rising case counts.\n\nOver 4,400 confirmed Ebola cases have been tracked alongside active cholera surges across six regional countries, driving urgent distribution of oral rehydration salts and vaccines.\n\nGlobal health officials emphasized that swift international funding and local community engagement are critical to stemming transmission.",
+      imageUrl: IMG.autoRickshaw,
+      categoryId: catId("international", "World Affairs"),
+      scope: "international",
+      isFeatured: false,
+      isBreaking: true,
+      views: 18900,
+      likesCount: 420,
+      commentsCount: 95,
+      publishedAt: hoursAgo(4),
+    },
+    {
+      title: "International relief efforts underway following 7.4 magnitude earthquake in Colombia",
+      slug: "colombia-earthquake-relief-efforts",
+      summary:
+        "Search and rescue teams have deployed to western Colombia after severe tremors damaged infrastructure across key regions.",
+      content:
+        "Emergency responders and international humanitarian teams have launched search operations in western Colombia following a major 7.4 magnitude earthquake.\n\nInitial reports indicate damage to roads, bridges and power grids, with civil protection agencies coordinating emergency shelters and medical relief.\n\nGlobal humanitarian organizations have pledged medical supplies and heavy rescue equipment to assist affected municipal areas.",
+      imageUrl: IMG.swissParliament,
+      categoryId: catId("international", "World Affairs"),
+      scope: "international",
+      isFeatured: false,
+      isBreaking: true,
+      views: 21500,
+      likesCount: 630,
+      commentsCount: 140,
+      publishedAt: hoursAgo(6),
+    },
+    {
+      title: "Wall Street hits new record highs while EU enforces strict PPWR trade regulations",
+      slug: "wall-street-record-highs-eu-packaging-regulations",
+      summary:
+        "Equities climbed following stable economic indicators as European trade regulators roll out updated packaging rules for global exporters.",
+      content:
+        "Major stock indices reached all-time highs following data indicating steady economic growth and moderating inflation metrics.\n\nConcurrently, European authorities announced the full applicability of the Packaging and Packaging Waste Regulation (PPWR), establishing stricter circular economy standards for global manufacturers.\n\nMarket analysts noted that technology and industrial sectors led trading gains despite shifting compliance requirements for international supply chains.",
+      imageUrl: IMG.nyc,
+      categoryId: catId("international", "Business"),
+      scope: "international",
+      isFeatured: true,
+      isBreaking: false,
+      views: 19400,
+      likesCount: 510,
+      commentsCount: 88,
+      publishedAt: hoursAgo(8),
+    },
+    {
+      title: "India launches Semicon 2.0 with ₹1,27,500 crore outlay for chip fabrication push",
+      slug: "semicon-india-2-semiconductor-fabrication-push",
+      summary:
+        "The national semiconductor initiative targets domestic chip design, advanced packaging, and multi-hub fabrication plants.",
+      content:
+        "India has officially initiated 'Semicon 2.0' with an approved outlay of ₹1,27,500 crore aimed at expanding the nation's high-tech manufacturing capacity.\n\nThe programme focuses on six strategic pillars: semiconductor design, advanced packaging facilities, equipment manufacturing, R&D institutes, and talent pipelines.\n\nIndustry leaders welcomed the initiative, highlighting plans for new private-public partnerships to build domestic silicon wafers and microelectronics hubs.",
+      imageUrl: IMG.techHands,
+      categoryId: catId("national", "Business"),
+      scope: "national",
+      isFeatured: true,
+      isBreaking: true,
+      views: 28900,
+      likesCount: 1120,
+      commentsCount: 240,
+      publishedAt: hoursAgo(2),
+    },
+    {
+      title: "ISRO and NASA expand TRUST bilateral agreement for joint lunar exploration and deep space R&D",
+      slug: "isro-nasa-trust-lunar-exploration-agreement",
+      summary:
+        "Space agencies agreed on expanded scientific data sharing and prospective joint payloads under the TRUST space initiative.",
+      content:
+        "Senior delegations from ISRO and NASA concluded bilateral talks in Bengaluru, expanding their cooperative framework under the TRUST initiative.\n\nDiscussions prioritized open scientific data sharing, deep space navigation protocols, and prospective Indian scientific payloads on future lunar surface missions.\n\nBoth agencies reaffirmed their commitment to encouraging private space startups and commercial rocket launch authorizations.",
+      imageUrl: IMG.techCode,
+      categoryId: catId("national", "Education"),
+      scope: "national",
+      isFeatured: true,
+      isBreaking: false,
+      views: 23100,
+      likesCount: 940,
+      commentsCount: 180,
+      publishedAt: hoursAgo(5),
+    },
+    {
+      title: "IMD and NOAA deploy IOLA coupled ocean model to improve extreme monsoon forecasting",
+      slug: "imd-noaa-iola-monsoon-weather-forecasting",
+      summary:
+        "Meteorological institutions have operationalized an integrated Indian Ocean forecasting system for severe weather events.",
+      content:
+        "The India Meteorological Department (IMD) and US oceanographic researchers have deployed the coupled IOLA (Indian Ocean–Land–Atmosphere) forecasting model.\n\nThe system combines high-resolution sea surface temperature observations with atmospheric dynamics to predict intense precipitation and monsoon fluctuations.\n\nScientists expect the enhanced forecasting accuracy to significantly assist agricultural planners and flood management agencies across coastal and inland states.",
+      imageUrl: IMG.varanasiColor,
+      categoryId: catId("national", "Health"),
+      scope: "national",
+      isFeatured: false,
+      isBreaking: false,
+      views: 14200,
+      likesCount: 380,
+      commentsCount: 62,
+      publishedAt: hoursAgo(10),
+    },
   ];
 
   await db.insert(newsArticles).values(news);

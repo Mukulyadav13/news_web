@@ -39,12 +39,12 @@ export default async function HomePage() {
       <BreakingStrip articles={breaking} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* ---------------- BBC Top Stories Hero & Sidebar ---------------- */}
+        {/* ---------------- GENZ Top Stories Hero & Sidebar ---------------- */}
         <section className="py-8 sm:py-10">
           <div className="mb-4 flex items-center gap-2 border-b border-brand pb-2">
             <span className="h-4 w-2 bg-brand" />
             <h2 className="text-sm font-black uppercase tracking-widest text-brand">
-              Top Stories
+              GENZ Top Stories
             </h2>
           </div>
 
@@ -64,16 +64,16 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right BBC Most Read Rankings Sidebar */}
+            {/* Right GENZ Most Read Rankings Sidebar */}
             <div>
               <BbcRankings articles={featured} />
             </div>
           </div>
         </section>
 
-        {/* ---------------- BBC Important Stories ---------------- */}
+        {/* ---------------- GENZ Features & Analysis ---------------- */}
         <section className="py-8 border-t border-line">
-          <SectionHeading title="Features & Analysis" eyebrow="BBC Editorial" actionLabel="View All News" actionHref="/news" />
+          <SectionHeading title="Features & Analysis" eyebrow="GENZ Editorial" actionLabel="View All News" actionHref="/news" />
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {importantArticles.map((article: any) => (
               <NewsCard key={article.id} article={article} />
@@ -81,7 +81,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ---------------- BBC World & National Dual Columns ---------------- */}
+        {/* ---------------- GENZ World & National Dual Columns ---------------- */}
         <section className="grid gap-6 py-8 border-t border-line lg:grid-cols-2">
           <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs sm:p-6">
             <SectionHeading
@@ -112,16 +112,16 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* ---------------- BBC Community & Campus Hub (Additive Feature) ---------------- */}
+        {/* ---------------- GENZ Community & Campus Hub ---------------- */}
         <section className="py-10 border-t border-line">
           <div className="rounded-3xl border border-community/20 bg-gradient-to-br from-community-soft/60 via-surface to-surface p-6 sm:p-8 shadow-xs">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-community/15 pb-6">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full bg-community/10 px-3 py-1 text-xs font-black uppercase tracking-widest text-community">
-                  BBC Add-on Feature
+                  GENZ Add-on Feature
                 </div>
                 <h2 className="mt-2 text-2xl font-black tracking-tight text-ink sm:text-3xl">
-                  BBC Community & Campus Hub
+                  GENZ Community & Campus Hub
                 </h2>
                 <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-soft">
                   Grassroot reporting, student dispatches, local city updates, and campus discussions shared directly by the community.

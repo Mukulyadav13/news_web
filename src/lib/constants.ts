@@ -1,6 +1,6 @@
-export const SITE_NAME = "Samachar";
+export const SITE_NAME = "GENZ News";
 
-export const SITE_TAGLINE = "News that matters. Stories from people.";
+export const SITE_TAGLINE = "Independent news. Stories from people.";
 
 /** The demo "logged-in" user for this sandbox — set during seeding. */
 export const DEMO_USER_ID = 1;

@@ -7,20 +7,23 @@ import { DEMO_USER } from "@/lib/constants";
 export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-surface shadow-xs">
-      {/* Top BBC Style Branding Header */}
+      {/* Top GENZ Branding Header */}
       <div className="bg-brand text-white">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="group flex items-center gap-2.5">
-            {/* Iconic BBC 3-Box Branding Logo */}
+            {/* Iconic GENZ 4-Box Branding Logo */}
             <div className="flex items-center gap-1">
               <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                B
+                G
               </span>
               <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                B
+                E
               </span>
               <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
-                C
+                N
+              </span>
+              <span className="flex h-7 w-7 items-center justify-center bg-white text-base font-black tracking-tighter text-black">
+                Z
               </span>
             </div>
             <span className="text-xl font-black tracking-wider text-white uppercase">
@@ -38,7 +41,7 @@ export function Header() {
               <input
                 type="search"
                 name="q"
-                placeholder="Search BBC News…"
+                placeholder="Search GENZ News…"
                 className="w-full rounded bg-white/15 py-1.5 pl-8 pr-3 text-xs text-white placeholder:text-white/70 focus:bg-white focus:text-black focus:outline-none focus:placeholder:text-gray-500"
               />
             </form>
@@ -47,7 +50,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* BBC Editorial Category Navigation Bar */}
+      {/* GENZ Editorial Category Navigation Bar */}
       <div className="border-b border-line bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <NavLinks />

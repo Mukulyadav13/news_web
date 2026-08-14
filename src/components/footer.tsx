@@ -3,7 +3,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="border-t border-line bg-surface text-ink">
-      {/* Top BBC Style Red Accent Strip */}
+      {/* Top Brand Accent Strip */}
       <div className="h-1 w-full bg-brand" />
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -13,13 +13,16 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2">
               <div className="flex items-center gap-1">
                 <span className="flex h-6 w-6 items-center justify-center bg-brand text-xs font-black text-white">
-                  B
+                  G
                 </span>
                 <span className="flex h-6 w-6 items-center justify-center bg-brand text-xs font-black text-white">
-                  B
+                  E
                 </span>
                 <span className="flex h-6 w-6 items-center justify-center bg-brand text-xs font-black text-white">
-                  C
+                  N
+                </span>
+                <span className="flex h-6 w-6 items-center justify-center bg-brand text-xs font-black text-white">
+                  Z
                 </span>
               </div>
               <span className="text-lg font-black tracking-wider text-ink uppercase">
@@ -27,7 +30,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-xs leading-relaxed text-ink-soft max-w-sm">
-              BBC News delivers trusted international and national breaking headlines, in-depth analysis, world business, science, technology, and community dispatches.
+              GENZ News delivers fast, modern, independent international and national breaking headlines, in-depth analysis, tech, culture, and community dispatches.
             </p>
           </div>
 
@@ -97,16 +100,16 @@ export function Footer() {
           {/* Editorial Integrity Column */}
           <div>
             <h4 className="text-xs font-black uppercase tracking-wider text-ink">
-              BBC Standards
+              GENZ Standards
             </h4>
             <p className="mt-3 text-xs leading-relaxed text-ink-faint">
-              BBC News is committed to impartiality, accuracy, and independent editorial standards across global reporting.
+              GENZ News is committed to impartiality, accuracy, and independent editorial standards across global reporting.
             </p>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 text-xs text-ink-faint sm:flex-row">
-          <p>© {new Date().getFullYear()} BBC News Inspired Media. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} GENZ News. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/" className="hover:underline">Terms of Use</Link>
             <Link href="/" className="hover:underline">Privacy Policy</Link>

@@ -12,7 +12,7 @@ export function BbcRankings({ articles }: { articles: NewsArticleWithCategory[] 
           Most Read
         </h3>
         <span className="text-xs font-bold uppercase tracking-wider text-brand">
-          BBC Live
+          GENZ Live
         </span>
       </div>
 

@@ -12,7 +12,7 @@ export function BreakingStrip({ articles }: { articles: NewsArticle[] }) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-90" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
           </span>
-          BBC LIVE
+          GENZ LIVE
         </span>
         <div className="no-scrollbar flex items-center gap-6 overflow-x-auto whitespace-nowrap">
           {articles.map((a) => (
